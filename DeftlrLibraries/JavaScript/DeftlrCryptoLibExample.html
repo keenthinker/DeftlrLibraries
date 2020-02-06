@@ -1,0 +1,167 @@
+<!-- Copyright (c) 2016, 2017, 2018, 2019, 2020 U&A Services UG -->
+<html>
+<head>
+	<title>Test</title>
+	<link href=".\libs\bootstrap.3.3.6\Content\bootstrap.min.css" rel="stylesheet"/>
+	<script src=".\rollups\aes.js"></script>
+	<script src=".\rollups\pbkdf2.js"></script>
+	<script src=".\libs\jquery.2.2.3\Content\Scripts\jquery-2.2.3.min.js"></script>
+	<script src=".\libs\bootstrap.3.3.6\Scripts\bootstrap.min.js"></script>
+	<script src=".\libs\cryptojsutils.js"></script>
+	<script src=".\libs\cryptojsutilswrapper.js"></script>
+	<script src="DeftlrCryptoLib.js"></script>
+	<script>
+		function print(text) {
+			console.log(text);
+			$('#outputPanel').append(text + "</br>");
+		}
+
+		$(document).ready(function() {
+			print('Ready to rumble ...');
+
+			var clientVerificationToken = "ABC123XYZ";
+			var url = "https://deftlr.com/api/";
+			var token = "secret";
+			var deftlrCryptoLib = new DeftlrCryptoLib(clientVerificationToken, url, token);
+			
+			var tag = "example";
+			
+			/*			
+			deftlrCryptoLib.readMessage(tag, function(message, readError) {
+				if (!readError) {
+					print(message);
+				} else {
+					print(readError);
+				}
+			}, function (error) {
+				print(error);
+			});
+			*/
+			
+			/*
+			deftlrCryptoLib.createMessage(tag, "Hello, Deftlr!", function (message, createError) {
+				if (createError) {
+					print(createError);
+				} else {
+					print(message);
+				}
+			}, function (error) {
+				print(error);
+			});
+			*/
+			
+			/*
+			deftlrCryptoLib.searchTag(tag, function (message, searchError) {
+				if (searchError) {
+					print(searchError);
+				} else {
+					print(message);
+				}
+			}, function (error) {
+				print(error);
+			});
+			*/
+			
+			/*
+			deftlrCryptoLib.deleteMessage(tag, function (message, deleteMessage) {
+				if (deleteMessage) {
+					print(deleteMessage);
+				} else {
+					print(message);
+				}
+			}, function (errorMessage) {
+				print(errorMessage);
+			});
+			*/
+		});		
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<p id="outputPanel"></p>
+				<hr />
+			</div>
+		</div>
+		
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Getting Started</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    We offer a JavaScript helper library as an example of how to access and consume the API REST
+                    service from a JavaScript application.
+                    The library wraps the encryption resp. decryption process and the handling of the low level API.
+                    The <a href="https://deftlr.com/">deftlr.com</a> page utilizes the same low level API, so every entry created using the library
+                    is instantly accessible from the website and vice versa (including entries created with libraries for another
+                    programming language).
+                    The JavaScript library is a module that should be instanciated with a constructor call, that accepts three parameters:
+                </p>
+                <p>
+                    <pre>
+// your API key
+var clientVerificationToken = 'ABC123XYZ';
+	
+// the API (custom) base url
+var url = 'https://deftlr.com/api/';
+	
+// the secret to use for all requests using the current object
+var token = 'secret';
+	
+var deftlrCryptoLibrary = new DeftlrCryptoLibrary(clientVerificationToken, url, token);
+						</pre>
+                <p>
+                    Currently four methods are available, all with the same signature (with one small exception):
+                </p>
+                <p>
+                    <ul>
+                        <li><code>searchTag(tag, doneCallback, failCallback)</code> check if the specified tag exists</li>
+                        <li><code>readMessage(tag, doneCallback, failCallback)</code> retrieve the decrypted content for the specified tag</li>
+                        <li><code>createMessage(tag, message, doneCallback, failCallback)</code> create new entry for the specified tag</li>
+                        <li><code>deleteMessage(tag, doneCallback, failCallback)</code> delete the entry for the specified tag</li>
+                    </ul>
+                </p>
+                <p>
+                    Search for a specified tag and handle the result example:
+                </p>
+                <p>
+                    <pre>
+deftlrCryptoLibrary.searchTag('hello', 
+	// doneCallback handler
+	function(result, error) {
+		if (!error) {
+			console.log(result);
+		} else {
+			console.log(error);
+		}
+	}, 
+	// failCallback handler
+	function (generalError) {
+		console.log(generalError);
+	});
+					</pre>
+                </p>
+                <p>
+                    Download the <a href="#">JavaScript DeftlrCryptoLibrary here</a>.
+                </p>
+                <p>
+                    We are currently working on:
+                </p>
+                <p>
+                    <ul>
+                        <li><code>listTags</code> find all tags belonging to the specified master tag</li>
+                        <li><code>readFile</code> retrieve an entry containing file info and offer the file to the user</li>
+                        <li><code>createFile</code> create an entry from a file content</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+		
+	</div>
+</body>
+</html>
